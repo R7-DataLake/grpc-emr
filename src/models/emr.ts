@@ -8,6 +8,7 @@ export class EmrModel {
     return db('person as p')
       .select(
         'p.hospcode',
+        'h.hospname',
         'p.hn',
         'p.cid',
         'p.title',
@@ -20,6 +21,7 @@ export class EmrModel {
         'n.name as nation',
         'p.typearea',
         'p.d_update')
+      .innerJoin('libs.hospitals as h', 'h.hospcode', 'p.hospcode')
       .joinRaw('left join libs.nations as n on n.code=p.nation and n.hospcode=p.hospcode')
       .joinRaw('libs.occupations as c on c.code=p.occupation and c.hospcode=p.hospcode')
       .where('p.hospcode', hospcode)
@@ -34,6 +36,7 @@ export class EmrModel {
       .select(
         'o.hospcode',
         'h.hospname',
+        'o.hn',
         'o.date_serv',
         'o.time_serv',
         'o.seq',

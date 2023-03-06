@@ -28,4 +28,13 @@ export class EmrModel {
       .first();
   }
 
+  async getLastVisit(hospcode: any, hn: any): Promise<any> {
+    const db: Knex = await getConnection()
+    return db('opd as o')
+      .select()
+      .where('p.hospcode', hospcode)
+      .where('p.hn', hn)
+      .limit(10);
+  }
+
 }

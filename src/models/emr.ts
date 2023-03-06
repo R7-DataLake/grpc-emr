@@ -4,7 +4,7 @@ import getConnection from "../db/connection";
 export class EmrModel {
 
   async getPerson(hospcode: any, hn: any): Promise<any> {
-    const db: Knex = await getConnection()
+    const db: Knex = await getConnection();
     return db('person as p')
       .select(
         'p.hospcode',
@@ -29,11 +29,36 @@ export class EmrModel {
   }
 
   async getLastVisit(hospcode: any, hn: any): Promise<any> {
-    const db: Knex = await getConnection()
+    const db: Knex = await getConnection();
     return db('opd as o')
-      .select()
-      .where('p.hospcode', hospcode)
-      .where('p.hn', hn)
+      .select(
+        'o.hospcode',
+        'h.hospname',
+        'o.date_serv',
+        'o.time_serv',
+        'o.seq',
+        'o.chiefcomp',
+        'o.btemp',
+        'o.sbp',
+        'o.dbp',
+        'o.pr',
+        'o.rr',
+        'o.ins_type',
+        'i.name as ins_type_name',
+        'o.ins_number',
+        'o.ins_hospmain',
+        'hm.hospname as ins_hospmain_name',
+        'o.ins_hospsub',
+        'hs.hospname as ins_hospsub_name',
+        'o.diag_text',
+        'o.d_update'
+      )
+      .innerJoin('libs.hospitals as h', 'h.hospcode', 'o.hospcode')
+      .leftJoin('libs.hospitals as hm', 'hm.hospcode', 'o.ins_hospmain')
+      .leftJoin('libs.hospitals as hs', 'hs.hospcode', 'o.ins_hospsub')
+      .joinRaw('left join libs.insurances as i on i.code=o.ins_type and i.hospcode=o.hospcode')
+      .where('o.hospcode', hospcode)
+      .where('o.hn', hn)
       .limit(10);
   }
 

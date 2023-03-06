@@ -11,20 +11,52 @@ message PersonRequest {
   string hn = 2;
 }
 
+message LastVisitRequest {
+  string hospcode = 1;
+  string hn = 2;
+}
+
 message PersonReply {
   message Data {
     string hospcode = 1;
-    string hn = 2;
-    string cid = 3;
-    string title = 4;
-    string fname = 5;
-    string lname = 6;
-    string birth = 7;
-    string sex = 8;
-    string marriage = 9;
-    string occupation = 10;
-    string nation = 11;
-    string typearea = 12;
-    string dUpdate = 13;
+    string hospname = 2;
+    string hn = 3;
+    string cid = 4;
+    string title = 5;
+    string fname = 6;
+    string lname = 7;
+    string birth = 8;
+    string sex = 9;
+    string marriage = 10;
+    string occupation = 11;
+    string nation = 12;
+    string typearea = 13;
+    string dUpdate = 14;
+  }
+}
+
+message LastVisitReply {
+  message Data {
+    string hospcode = 1;
+    string hospname = 2;
+    string hn = 3;
+    string dateServ = 4;
+    string timeServ = 5;
+    string seq = 6;
+    string chiefcomop = 7;
+    float btemp = 8;
+    int32 sbp = 9;
+    int32 dbp = 10;
+    int32 pr = 11;
+    int32 rr = 12;
+    string insType = 13;
+    string insTypeName = 14;
+    string insNumber = 15;
+    string insHospmain = 16;
+    string insHospmainName = 17;
+    string insHospsub = 18;
+    string insHospsubName = 19;
+    string diagText = 20;
+    string dUpdate = 21;
   }
 }

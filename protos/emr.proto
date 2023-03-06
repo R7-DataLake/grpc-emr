@@ -24,7 +24,7 @@ message PersonReply {
     string marriage = 9;
     string occupation = 10;
     string nation = 11;
-    string typearea = 17;
-    string dUpdate = 18;
+    string typearea = 12;
+    string dUpdate = 13;
   }
 }

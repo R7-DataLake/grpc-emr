@@ -1,0 +1,22 @@
+version: "3"
+services:
+  grpc-emr:
+    image: "mophos/r7platform-mophos/r7platform-grpc-emr"
+    container_name: "grpc-emr"
+    environment:
+      - NODE_ENV=production
+      - R7PLATFORM_GRPC_EMR_DB_HOST=127.0.0.1
+      - R7PLATFORM_GRPC_EMR_DB_PORT=5433
+      - R7PLATFORM_GRPC_EMR_DB_NAME=r7platform
+      - R7PLATFORM_GRPC_EMR_DB_SCHEMA=rawdata
+      - R7PLATFORM_GRPC_EMR_DB_USER=postgres
+      - R7PLATFORM_GRPC_EMR_DB_PASSWORD=123456
+      - R7PLATFORM_GRPC_EMR_DB_POOL_MIN=2
+      - R7PLATFORM_GRPC_EMR_DB_POOL_MAX=100
+      - R7PLATFORM_GRPC_EMR_SECRET_KEY=xeIjNUj8oF5KCitrAYxTAPWeZOjZZVHw
+      - R7PLATFORM_GRPC_EMR_DB_DEBUG=Y
+
+    ports:
+      - 50052:50051
+
+    restart: always

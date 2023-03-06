@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package emr;
+
+service EmrService {
+  rpc GetPerson (PersonRequest) returns (PersonReply) {}
+}
+
+message PersonRequest {
+  string hospcode = 1;
+  string hn = 2;
+}
+
+message PersonReply {
+  message Data {
+    string hospcode = 1;
+    string hn = 2;
+    string cid = 3;
+    string title = 4;
+    string fname = 5;
+    string lname = 6;
+    string birth = 7;
+    string sex = 8;
+    string marriage = 9;
+    string occupation = 10;
+    string nation = 11;
+    string typearea = 17;
+    string dUpdate = 18;
+  }
+}

@@ -12,7 +12,7 @@ let app: any
 
 const PROTO_PATH = path.join(__dirname, '../protos/emr.proto')
 
-const HOSTPORT = '0.0.0.0:50051'
+const HOSTPORT = '0.0.0.0:50052'
 
 const verifyToken = (ctx: any, next: any) => {
 

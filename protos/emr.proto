@@ -6,6 +6,13 @@ service EmrService {
   rpc GetPerson (PersonRequest) returns (PersonReply) {}
   rpc GetLastOpd (LastOpdRequest) returns (LastOpdReply) {}
   rpc GetLastIpd (LastIpdRequest) returns (LastIpdReply) {}
+  rpc GetOpdDiag (OpdDiagRequest) returns (OpdDiagReply) {}
+  rpc GetIpdDiag (IpdDiagRequest) returns (IpdDiagReply) {}
+  rpc GetOpdDrug (OpdDrugRequest) returns (OpdDrugReply) {}
+  rpc GetIpdDrug (IpdDrugRequest) returns (IpdDrugReply) {}
+  rpc GetOpdLab (OpdLabRequest) returns (OpdLabReply) {}
+  rpc GetOpdInfo (OpdInfoRequest) returns (OpdInfoReply) {}
+  rpc GetIpdInfo (IpdInfoRequest) returns (IpdInfoReply) {}
 }
 
 message PersonRequest {
@@ -18,9 +25,44 @@ message LastOpdRequest {
   string hn = 2;
 }
 
+message OpdInfoRequest {
+  string hospcode = 1;
+  string seq = 2;
+}
+
+message IpdInfoRequest {
+  string hospcode = 1;
+  string an = 2;
+}
+
 message LastIpdRequest {
   string hospcode = 1;
   string hn = 2;
+}
+
+message OpdDiagRequest {
+  string hospcode = 1;
+  string seq = 2;
+}
+
+message OpdLabRequest {
+  string hospcode = 1;
+  string seq = 2;
+}
+
+message OpdDrugRequest {
+  string hospcode = 1;
+  string seq = 2;
+}
+
+message IpdDrugRequest {
+  string hospcode = 1;
+  string an = 2;
+}
+
+message IpdDiagRequest {
+  string hospcode = 1;
+  string an = 2;
 }
 
 message PersonReply {
@@ -82,4 +124,123 @@ message LastIpdReply {
     string dUpdate = 11;
   }
   repeated Results results = 2;
+}
+
+message OpdDiagReply {
+  message Results {
+    string hospcode = 1;
+    string hn = 2;
+    string seq = 3;
+    string datedx = 4;
+    string diag = 5;
+    string diag_name = 6;
+    string dxtype = 7;
+    string dUpdate = 8;
+  }
+  repeated Results results = 2;
+}
+
+message IpdDiagReply {
+  message Results {
+    string hospcode = 1;
+    string hn = 2;
+    string an = 3;
+    string diag = 4;
+    string diag_name = 5;
+    string dxtype = 6;
+    string dUpdate = 7;
+  }
+  repeated Results results = 2;
+}
+
+message OpdDrugReply {
+  message Results {
+    string hospcode = 1;
+    string hn = 2;
+    string seq = 3;
+    string did = 4;
+    string drug_name = 5;
+    int32 amount = 6;
+    string unit = 7;
+    string unit_pack = 8;
+    float drugprice = 9;
+    float drugcost = 10;
+    string usage1 = 11;
+    string usage2 = 12;
+    string usage3 = 13;
+    string dUpdate = 14;
+  }
+  repeated Results results = 2;
+}
+
+message IpdDrugReply {
+  message Results {
+    string hospcode = 1;
+    string hn = 2;
+    string an = 3;
+    string did = 4;
+    string drug_name = 5;
+    int32 amount = 6;
+    string unit = 7;
+    string unit_pack = 8;
+    float drugprice = 9;
+    float drugcost = 10;
+    string usage1 = 11;
+    string usage2 = 12;
+    string usage3 = 13;
+    string dUpdate = 14;
+  }
+  repeated Results results = 2;
+}
+
+message OpdLabReply {
+  message Results {
+    string hospcode = 1;
+    string hn = 2;
+    string seq = 3;
+    string labtest = 4;
+    string lab_name = 5;
+    string lab_group_name = 6;
+    string labresult = 7;
+    string dUpdate = 8;
+  }
+  repeated Results results = 2;
+}
+
+message OpdInfoReply {
+  string hospcode = 1;
+  string hospname = 2;
+  string hn = 3;
+  string dateServ = 4;
+  string timeServ = 5;
+  string seq = 6;
+  string chiefcomp = 7;
+  float btemp = 8;
+  int32 sbp = 9;
+  int32 dbp = 10;
+  int32 pr = 11;
+  int32 rr = 12;
+  string insType = 13;
+  string insTypeName = 14;
+  string insNumber = 15;
+  string insHospmain = 16;
+  string insHospmainName = 17;
+  string insHospsub = 18;
+  string insHospsubName = 19;
+  string diagText = 20;
+  string dUpdate = 21;
+}
+
+message IpdInfoReply {
+  string hospcode = 1;
+  string hospname = 2;
+  string hn = 3;
+  string an = 4;
+  string dateadm = 5;
+  string timeadm = 6;
+  string datedsc = 7;
+  string timedsc = 8;
+  string dischs = 9;
+  string discht = 10;
+  string dUpdate = 11;
 }

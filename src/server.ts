@@ -57,6 +57,12 @@ const main = () => {
   app.use('GetLastOpd', emrHandler.getLastOpd)
   app.use('GetLastIpd', emrHandler.getLastIpd)
   app.use('GetOpdDiag', emrHandler.getOpdDiag)
+  app.use('GetIpdDiag', emrHandler.getIpdDiag)
+  app.use('GetOpdDrug', emrHandler.getOpdDrug)
+  app.use('GetIpdDrug', emrHandler.getIpdDrug)
+  app.use('GetOpdLab', emrHandler.getOpdLab)
+  app.use('GetOpdInfo', emrHandler.getOpdInfo)
+  app.use('GetIpdInfo', emrHandler.getIpdInfo)
 
   // Start app
   app.start(HOSTPORT)

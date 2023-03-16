@@ -37,7 +37,7 @@ export class EmrModel {
     });
   }
 
-  async getOPDLastVisit(hospcode: any, hn: any): Promise<any> {
+  async getLastOpd(hospcode: any, hn: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.opd as o')
@@ -79,6 +79,35 @@ export class EmrModel {
           and dx.dxtype = '1'
           and left(dx.diag, 1) <> 'Z'
         ) `)
+        .limit(10)
+        .then((result: any) => resolve(result))
+        .catch((error: any) => reject(error))
+        .finally(async () => await db.destroy());
+    });
+  }
+
+  async getLastIpd(hospcode: any, hn: any): Promise<any> {
+    const db: Knex = await getConnection();
+    return new Promise((resolve: any, reject: any) => {
+      db('rawdata.ipd as i')
+        .select(
+          'i.hospcode',
+          'h.hospname',
+          'i.an',
+          'i.hn',
+          'i.dateadm',
+          'i.timeadm',
+          'i.datedsc',
+          'i.timedsc',
+          'ds.name as dischs',
+          'dt.name as discht',
+          'i.d_update'
+        )
+        .innerJoin('libs.hospitals as h', 'h.hospcode', 'i.hospcode')
+        .leftJoin('libs.dischs as ds', 'ds.code', 'i.dischs')
+        .leftJoin('libs.discht as dt', 'dt.code', 'i.discht')
+        .where('i.hospcode', hospcode)
+        .where('i.hn', hn)
         .limit(10)
         .then((result: any) => resolve(result))
         .catch((error: any) => reject(error))

@@ -54,7 +54,8 @@ const main = () => {
 
   // Services
   app.use('GetPerson', emrHandler.getPerson)
-  app.use('GetOPDLastVisit', emrHandler.getOPDLastVisit)
+  app.use('GetLastOpd', emrHandler.getLastOpd)
+  app.use('GetLastIpd', emrHandler.getLastIpd)
 
   // Start app
   app.start(HOSTPORT)

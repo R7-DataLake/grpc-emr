@@ -4,7 +4,8 @@ package emr;
 
 service EmrService {
   rpc GetPerson (PersonRequest) returns (PersonReply) {}
-  rpc GetOPDLastVisit (LastOPDVisitRequest) returns (LastOPDVisitReply) {}
+  rpc GetLastOpd (LastOpdRequest) returns (LastOpdReply) {}
+  rpc GetLastIpd (LastIpdRequest) returns (LastIpdReply) {}
 }
 
 message PersonRequest {
@@ -12,7 +13,12 @@ message PersonRequest {
   string hn = 2;
 }
 
-message LastOPDVisitRequest {
+message LastOpdRequest {
+  string hospcode = 1;
+  string hn = 2;
+}
+
+message LastIpdRequest {
   string hospcode = 1;
   string hn = 2;
 }
@@ -34,7 +40,7 @@ message PersonReply {
   string dUpdate = 14;
 }
 
-message LastOPDVisitReply {
+message LastOpdReply {
   message Results {
     string hospcode = 1;
     string hospname = 2;
@@ -58,6 +64,22 @@ message LastOPDVisitReply {
     string diagText = 20;
     string dUpdate = 21;
   }
+  repeated Results results = 2;
+}
 
+message LastIpdReply {
+  message Results {
+    string hospcode = 1;
+    string hospname = 2;
+    string hn = 3;
+    string an = 4;
+    string dateadm = 5;
+    string timeadm = 6;
+    string datedsc = 7;
+    string timedsc = 8;
+    string dischs = 9;
+    string discht = 10;
+    string dUpdate = 11;
+  }
   repeated Results results = 2;
 }

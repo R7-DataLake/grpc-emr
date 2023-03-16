@@ -6,6 +6,7 @@ service EmrService {
   rpc GetPerson (PersonRequest) returns (PersonReply) {}
   rpc GetLastOpd (LastOpdRequest) returns (LastOpdReply) {}
   rpc GetLastIpd (LastIpdRequest) returns (LastIpdReply) {}
+  rpc GetOpdDiag (OpdDiagRequest) returns (OpdDiagReply) {}
 }
 
 message PersonRequest {
@@ -21,6 +22,11 @@ message LastOpdRequest {
 message LastIpdRequest {
   string hospcode = 1;
   string hn = 2;
+}
+
+message OpdDiagRequest {
+  string hospcode = 1;
+  string seq = 2;
 }
 
 message PersonReply {
@@ -80,6 +86,21 @@ message LastIpdReply {
     string dischs = 9;
     string discht = 10;
     string dUpdate = 11;
+  }
+  repeated Results results = 2;
+}
+
+message OpdDiagReply {
+  message Results {
+    string hospcode = 1;
+    string hospname = 2;
+    string hn = 3;
+    string seq = 4;
+    string datedx = 5;
+    string diag = 6;
+    string diag_name = 7;
+    string dxtype = 8;
+    string dUpdate = 9;
   }
   repeated Results results = 2;
 }

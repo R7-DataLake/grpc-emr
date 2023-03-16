@@ -56,6 +56,7 @@ const main = () => {
   app.use('GetPerson', emrHandler.getPerson)
   app.use('GetLastOpd', emrHandler.getLastOpd)
   app.use('GetLastIpd', emrHandler.getLastIpd)
+  app.use('GetOpdDiag', emrHandler.getOpdDiag)
 
   // Start app
   app.start(HOSTPORT)

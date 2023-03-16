@@ -115,4 +115,31 @@ export class EmrModel {
     });
   }
 
+  async getOpdDiag(hospcode: any, seq: any): Promise<any> {
+    const db: Knex = await getConnection();
+    return new Promise((resolve: any, reject: any) => {
+      db('rawdata.opdx as o')
+        .select(
+          'o.hospcode',
+          'h.hospname',
+          'o.hn',
+          'o.seq',
+          'o.datedx',
+          'o.diag',
+          'it.description as diag_name',
+          'dt.name as dxtype',
+          'o.provider',
+          'o.d_update'
+        )
+        .innerJoin('libs.hospitals as h', 'h.hospcode', 'o.hospcode')
+        .leftJoin('libs.icd10tm as it', 'it.code', 'o.diag')
+        .leftJoin('libs.diag_types as dt', 'dt.code', 'o.dxtype')
+        .where('o.hospcode', hospcode)
+        .where('o.seq', seq)
+        .then((result: any) => resolve(result))
+        .catch((error: any) => reject(error))
+        .finally(async () => await db.destroy());
+    });
+  }
+
 }

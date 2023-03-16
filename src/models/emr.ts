@@ -128,7 +128,6 @@ export class EmrModel {
           'o.diag',
           'it.description as diag_name',
           'dt.name as dxtype',
-          'o.provider',
           'o.d_update'
         )
         .innerJoin('libs.hospitals as h', 'h.hospcode', 'o.hospcode')

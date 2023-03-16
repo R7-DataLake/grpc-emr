@@ -17,14 +17,16 @@ export class EmrModel {
           'p.lname',
           'p.birth',
           'p.sex',
-          'p.marriage',
+          'm.name as marriage',
           'c.name as occupation',
           'n.name as nation',
-          'p.typearea',
+          't.name as typearea',
           'p.d_update')
         .innerJoin('libs.hospitals as h', 'h.hospcode', 'p.hospcode')
         .joinRaw('left join libs.nations as n on n.code=p.nation and n.hospcode=p.hospcode')
-        .joinRaw('libs.occupations as c on c.code=p.occupation and c.hospcode=p.hospcode')
+        .joinRaw('left join libs.occupations as c on c.code=p.occupation and c.hospcode=p.hospcode')
+        .joinRaw('left join libs.marriages as m on m.code=p.marriage')
+        .joinRaw('left join libs.typeareas as t on t.code=p.typearea')
         .where('p.hospcode', hospcode)
         .where('p.hn', hn)
         .limit(1)
@@ -32,11 +34,10 @@ export class EmrModel {
         .then((result: any) => resolve(result))
         .catch((error: any) => reject(error))
         .finally(async () => await db.destroy());
-
     });
   }
 
-  async getLastVisit(hospcode: any, hn: any): Promise<any> {
+  async getOPDLastVisit(hospcode: any, hn: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.opd as o')
@@ -69,6 +70,15 @@ export class EmrModel {
         .joinRaw('left join libs.insurances as i on i.code=o.ins_type and i.hospcode=o.hospcode')
         .where('o.hospcode', hospcode)
         .where('o.hn', hn)
+        .whereRaw(`
+        exists (
+          select dx.seq 
+          from rawdata.opdx as dx 
+          where dx.seq = o.seq
+          and dx.hospcode = o.hospcode
+          and dx.dxtype = '1'
+          and left(dx.diag, 1) <> 'Z'
+        ) `)
         .limit(10)
         .then((result: any) => resolve(result))
         .catch((error: any) => reject(error))

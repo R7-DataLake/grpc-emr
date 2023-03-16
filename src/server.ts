@@ -54,6 +54,7 @@ const main = () => {
 
   // Services
   app.use('GetPerson', emrHandler.getPerson)
+  app.use('GetOPDLastVisit', emrHandler.getOPDLastVisit)
 
   // Start app
   app.start(HOSTPORT)

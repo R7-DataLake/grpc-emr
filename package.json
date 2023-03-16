@@ -14,7 +14,9 @@
     "@grpc/grpc-js": "^1.8.12",
     "@grpc/proto-loader": "^0.7.5",
     "@malijs/jwt": "^0.4.0",
+    "ajv": "^8.12.0",
     "dotenv": "^16.0.3",
+    "fluent-json-schema": "^4.1.0",
     "jsonwebtoken": "^9.0.0",
     "knex": "^2.4.2",
     "lodash": "^4.17.21",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.191",
+    "@types/luxon": "^3.2.0",
     "@types/node": "^18.15.3",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",

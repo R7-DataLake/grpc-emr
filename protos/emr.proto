@@ -1,8 +1,11 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
 package emr;
 
 service EmrService {
+  rpc Status (google.protobuf.Empty) returns (StatusReply) {}
   rpc GetPerson (PersonRequest) returns (PersonReply) {}
   rpc GetLastOpd (LastOpdRequest) returns (LastOpdReply) {}
   rpc GetLastIpd (LastIpdRequest) returns (LastIpdReply) {}
@@ -13,6 +16,11 @@ service EmrService {
   rpc GetOpdLab (OpdLabRequest) returns (OpdLabReply) {}
   rpc GetOpdInfo (OpdInfoRequest) returns (OpdInfoReply) {}
   rpc GetIpdInfo (IpdInfoRequest) returns (IpdInfoReply) {}
+}
+
+message StatusReply {
+  bool ok = 1;
+  string version = 2;
 }
 
 message PersonRequest {

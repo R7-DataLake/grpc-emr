@@ -3,10 +3,12 @@ const Mali = require('mali')
 const jwt = require('jsonwebtoken')
 
 import { EmrHandler } from "./handlers/emr"
+import { StatusHandler } from "./handlers/status"
 
 const secret = process.env.R7PLATFORM_GRPC_EMR_SECRET_KEY || ''
 
 const emrHandler = new EmrHandler()
+const statusHandler = new StatusHandler();
 
 let app: any
 
@@ -38,7 +40,7 @@ const logger = async (ctx: any, next: any) => {
   await next()
   const current = new Date()
   const ms = current.getTime() - start.getTime()
-  console.log('%s : %s [%s] - %s ms', ctx.user.sub, ctx.name, ctx.type, ms)
+  console.log('%s [%s] - %s ms', ctx.name, ctx.type, ms)
 }
 
 const main = () => {
@@ -49,20 +51,21 @@ const main = () => {
   })
 
   // Middleware
-  app.use(verifyToken)
+  // app.use(verifyToken)
   app.use(logger)
 
   // Services
-  app.use('GetPerson', emrHandler.getPerson)
-  app.use('GetLastOpd', emrHandler.getLastOpd)
-  app.use('GetLastIpd', emrHandler.getLastIpd)
-  app.use('GetOpdDiag', emrHandler.getOpdDiag)
-  app.use('GetIpdDiag', emrHandler.getIpdDiag)
-  app.use('GetOpdDrug', emrHandler.getOpdDrug)
-  app.use('GetIpdDrug', emrHandler.getIpdDrug)
-  app.use('GetOpdLab', emrHandler.getOpdLab)
-  app.use('GetOpdInfo', emrHandler.getOpdInfo)
-  app.use('GetIpdInfo', emrHandler.getIpdInfo)
+  app.use('GetPerson', verifyToken, emrHandler.getPerson)
+  app.use('GetLastOpd', verifyToken, emrHandler.getLastOpd)
+  app.use('GetLastIpd', verifyToken, emrHandler.getLastIpd)
+  app.use('GetOpdDiag', verifyToken, emrHandler.getOpdDiag)
+  app.use('GetIpdDiag', verifyToken, emrHandler.getIpdDiag)
+  app.use('GetOpdDrug', verifyToken, emrHandler.getOpdDrug)
+  app.use('GetIpdDrug', verifyToken, emrHandler.getIpdDrug)
+  app.use('GetOpdLab', verifyToken, emrHandler.getOpdLab)
+  app.use('GetOpdInfo', verifyToken, emrHandler.getOpdInfo)
+  app.use('GetIpdInfo', verifyToken, emrHandler.getIpdInfo)
+  app.use('Status', statusHandler.status)
 
   // Start app
   app.start(HOSTPORT)

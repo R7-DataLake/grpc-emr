@@ -135,6 +135,7 @@ export class EmrModel {
         .leftJoin('libs.diag_types as dt', 'dt.code', 'o.dxtype')
         .where('o.hospcode', hospcode)
         .where('o.seq', seq)
+        .orderBy('o.dxtype', 'asc')
         .then((result: any) => resolve(result))
         .catch((error: any) => reject(error))
         .finally(async () => await db.destroy());
@@ -159,6 +160,7 @@ export class EmrModel {
         .leftJoin('libs.diag_types as dt', 'dt.code', 'i.dxtype')
         .where('i.hospcode', hospcode)
         .where('i.an', an)
+        .orderBy('i.dxtype', 'asc')
         .then((result: any) => resolve(result))
         .catch((error: any) => reject(error))
         .finally(async () => await db.destroy());

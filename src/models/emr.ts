@@ -117,7 +117,7 @@ export class EmrModel {
     });
   }
 
-  async getOpdDiag(hospcode: any, seq: any): Promise<any> {
+  async getOpdDiag(hospcode: any, hn: any, seq: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.opdx as o')
@@ -134,6 +134,7 @@ export class EmrModel {
         .leftJoin('libs.icd10tm as it', 'it.code', 'o.diag')
         .leftJoin('libs.diag_types as dt', 'dt.code', 'o.dxtype')
         .where('o.hospcode', hospcode)
+        .where('o.hn', hn)
         .where('o.seq', seq)
         .orderBy('o.dxtype', 'asc')
         .then((result: any) => resolve(result))
@@ -142,7 +143,7 @@ export class EmrModel {
     });
   }
 
-  async getIpdDiag(hospcode: any, an: any): Promise<any> {
+  async getIpdDiag(hospcode: any, hn: any, an: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.ipdx as i')
@@ -159,6 +160,7 @@ export class EmrModel {
         .leftJoin('libs.icd10tm as it', 'it.code', 'i.diag')
         .leftJoin('libs.diag_types as dt', 'dt.code', 'i.dxtype')
         .where('i.hospcode', hospcode)
+        .where('i.hn', hn)
         .where('i.an', an)
         .orderBy('i.dxtype', 'asc')
         .then((result: any) => resolve(result))
@@ -167,7 +169,7 @@ export class EmrModel {
     });
   }
 
-  async getOpdDrug(hospcode: any, seq: any): Promise<any> {
+  async getOpdDrug(hospcode: any, hn: any, seq: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.opdrug as o')
@@ -194,6 +196,7 @@ export class EmrModel {
           and du.hospcode = o.hospcode
         `)
         .where('o.hospcode', hospcode)
+        .where('o.hn', hn)
         .where('o.seq', seq)
         .orderBy('d.name')
         .then((result: any) => resolve(result))
@@ -202,7 +205,7 @@ export class EmrModel {
     });
   }
 
-  async getIpdDrug(hospcode: any, an: any): Promise<any> {
+  async getIpdDrug(hospcode: any, hn: any, an: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.ipdrug as i')
@@ -229,6 +232,7 @@ export class EmrModel {
           and du.hospcode = i.hospcode
         `)
         .where('i.hospcode', hospcode)
+        .where('i.hn', hn)
         .where('i.an', an)
         .orderBy('d.name')
         .then((result: any) => resolve(result))
@@ -237,7 +241,7 @@ export class EmrModel {
     });
   }
 
-  async getOpdLab(hospcode: any, seq: any): Promise<any> {
+  async getOpdLab(hospcode: any, hn: any, seq: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.lab as l')
@@ -262,6 +266,7 @@ export class EmrModel {
         and lg.hospcode = l2.hospcode
         `)
         .where('l.hospcode', hospcode)
+        .where('l.hn', hn)
         .where('l.seq', seq)
         .orderBy('l2.name')
         .then((result: any) => resolve(result))
@@ -270,7 +275,7 @@ export class EmrModel {
     });
   }
 
-  async getOpdInfo(hospcode: any, seq: any): Promise<any> {
+  async getOpdInfo(hospcode: any, hn: any, seq: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.opd as o')
@@ -302,6 +307,7 @@ export class EmrModel {
         .leftJoin('libs.hospitals as hs', 'hs.hospcode', 'o.ins_hospsub')
         .joinRaw('left join libs.insurances as i on i.code=o.ins_type and i.hospcode=o.hospcode')
         .where('o.hospcode', hospcode)
+        .where('o.hn', hn)
         .where('o.seq', seq)
         .first()
         .then((result: any) => resolve(result))
@@ -310,7 +316,7 @@ export class EmrModel {
     });
   }
 
-  async getIpdInfo(hospcode: any, an: any): Promise<any> {
+  async getIpdInfo(hospcode: any, hn: any, an: any): Promise<any> {
     const db: Knex = await getConnection();
     return new Promise((resolve: any, reject: any) => {
       db('rawdata.ipd as i')
@@ -331,6 +337,7 @@ export class EmrModel {
         .leftJoin('libs.dischs as ds', 'ds.code', 'i.dischs')
         .leftJoin('libs.discht as dt', 'dt.code', 'i.discht')
         .where('i.hospcode', hospcode)
+        .where('i.hn', hn)
         .where('i.an', an)
         .first()
         .then((result: any) => resolve(result))

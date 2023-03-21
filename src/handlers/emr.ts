@@ -60,6 +60,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -89,7 +90,6 @@ export class EmrHandler {
           results: data
         };
       } else {
-        console.log('Not found')
         const err: any = new Error('DATA NOT FOUND')
         err.code = grpc.status.NOT_FOUND
         err.metadata = new grpc.Metadata()
@@ -97,6 +97,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -127,7 +128,6 @@ export class EmrHandler {
           results: data
         };
       } else {
-        console.log('Not found')
         const err: any = new Error('DATA NOT FOUND')
         err.code = grpc.status.NOT_FOUND
         err.metadata = new grpc.Metadata()
@@ -135,6 +135,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -151,8 +152,9 @@ export class EmrHandler {
 
     if (valid) {
       const hospcode = ctx.req.hospcode;
+      const hn = ctx.req.hn;
       const seq = ctx.req.seq;
-      const response: any = await emrModel.getOpdDiag(hospcode, seq);
+      const response: any = await emrModel.getOpdDiag(hospcode, hn, seq);
       if (!_.isEmpty(response)) {
         const _data: any = response.map((v: any) => {
           v.datedx = v.datedx ? DateTime.fromJSDate(v.datedx, { zone: 'Asia/Bangkok' }).toFormat('yyyy-MM-dd') : '';
@@ -164,7 +166,6 @@ export class EmrHandler {
           results: data
         };
       } else {
-        console.log('Not found')
         const err: any = new Error('DATA NOT FOUND')
         err.code = grpc.status.NOT_FOUND
         err.metadata = new grpc.Metadata()
@@ -172,6 +173,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -188,8 +190,9 @@ export class EmrHandler {
 
     if (valid) {
       const hospcode = ctx.req.hospcode;
+      const hn = ctx.req.hn;
       const an = ctx.req.an;
-      const response: any = await emrModel.getIpdDiag(hospcode, an);
+      const response: any = await emrModel.getIpdDiag(hospcode, hn, an);
       if (!_.isEmpty(response)) {
         const _data: any = response.map((v: any) => {
           v.d_update = DateTime.fromJSDate(v.d_update, { zone: 'Asia/Bangkok' }).toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
@@ -200,7 +203,6 @@ export class EmrHandler {
           results: data
         };
       } else {
-        console.log('Not found')
         const err: any = new Error('DATA NOT FOUND')
         err.code = grpc.status.NOT_FOUND
         err.metadata = new grpc.Metadata()
@@ -208,6 +210,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -224,8 +227,9 @@ export class EmrHandler {
 
     if (valid) {
       const hospcode = ctx.req.hospcode;
+      const hn = ctx.req.hn;
       const seq = ctx.req.seq;
-      const response: any = await emrModel.getOpdDrug(hospcode, seq);
+      const response: any = await emrModel.getOpdDrug(hospcode, hn, seq);
       if (!_.isEmpty(response)) {
         const _data: any = response.map((v: any) => {
           v.d_update = DateTime.fromJSDate(v.d_update, { zone: 'Asia/Bangkok' }).toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
@@ -244,6 +248,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -260,8 +265,9 @@ export class EmrHandler {
 
     if (valid) {
       const hospcode = ctx.req.hospcode;
+      const hn = ctx.req.hn;
       const an = ctx.req.an;
-      const response: any = await emrModel.getIpdDrug(hospcode, an);
+      const response: any = await emrModel.getIpdDrug(hospcode, hn, an);
       if (!_.isEmpty(response)) {
         const _data: any = response.map((v: any) => {
           v.d_update = DateTime.fromJSDate(v.d_update, { zone: 'Asia/Bangkok' }).toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
@@ -272,7 +278,6 @@ export class EmrHandler {
           results: data
         };
       } else {
-        console.log('Not found')
         const err: any = new Error('DATA NOT FOUND')
         err.code = grpc.status.NOT_FOUND
         err.metadata = new grpc.Metadata()
@@ -280,6 +285,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -296,8 +302,9 @@ export class EmrHandler {
 
     if (valid) {
       const hospcode = ctx.req.hospcode;
+      const hn = ctx.req.hn;
       const seq = ctx.req.seq;
-      const response: any = await emrModel.getOpdLab(hospcode, seq);
+      const response: any = await emrModel.getOpdLab(hospcode, hn, seq);
       if (!_.isEmpty(response)) {
         const _data: any = response.map((v: any) => {
           v.d_update = DateTime.fromJSDate(v.d_update, { zone: 'Asia/Bangkok' }).toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
@@ -308,7 +315,6 @@ export class EmrHandler {
           results: data
         };
       } else {
-        console.log('Not found')
         const err: any = new Error('DATA NOT FOUND')
         err.code = grpc.status.NOT_FOUND
         err.metadata = new grpc.Metadata()
@@ -316,6 +322,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -332,15 +339,15 @@ export class EmrHandler {
 
     if (valid) {
       const hospcode = ctx.req.hospcode;
+      const hn = ctx.req.hn;
       const seq = ctx.req.seq;
-      const response: any = await emrModel.getOpdInfo(hospcode, seq);
+      const response: any = await emrModel.getOpdInfo(hospcode, hn, seq);
       if (!_.isEmpty(response)) {
         response.date_serv = DateTime.fromJSDate(response.date_serv, { zone: 'Asia/Bangkok' }).toFormat('yyyy-MM-dd');
         response.d_update = DateTime.fromJSDate(response.d_update, { zone: 'Asia/Bangkok' }).toLocaleString(DateTime.DATETIME_MED_WITH_SECONDS);
         const data = convertCamelCase.camelizeKeys(response);
         ctx.res = data;
       } else {
-        console.log('Not found')
         const err: any = new Error('DATA NOT FOUND')
         err.code = grpc.status.NOT_FOUND
         err.metadata = new grpc.Metadata()
@@ -348,6 +355,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()
@@ -364,8 +372,9 @@ export class EmrHandler {
 
     if (valid) {
       const hospcode = ctx.req.hospcode;
+      const hn = ctx.req.hn;
       const an = ctx.req.an;
-      const response: any = await emrModel.getIpdInfo(hospcode, an);
+      const response: any = await emrModel.getIpdInfo(hospcode, hn, an);
       if (!_.isEmpty(response)) {
         response.dateadm = DateTime.fromJSDate(response.dateadm, { zone: 'Asia/Bangkok' }).toFormat('yyyy-MM-dd');
         response.datedsc = DateTime.fromJSDate(response.datedsc, { zone: 'Asia/Bangkok' }).toFormat('yyyy-MM-dd');
@@ -373,7 +382,6 @@ export class EmrHandler {
         const data = convertCamelCase.camelizeKeys(response);
         ctx.res = data;
       } else {
-        console.log('Not found')
         const err: any = new Error('DATA NOT FOUND')
         err.code = grpc.status.NOT_FOUND
         err.metadata = new grpc.Metadata()
@@ -381,6 +389,7 @@ export class EmrHandler {
         throw err
       }
     } else {
+      console.log(validate.errors);
       const err: any = new Error('INVALID PARAMS')
       err.code = grpc.status.INTERNAL
       err.metadata = new grpc.Metadata()

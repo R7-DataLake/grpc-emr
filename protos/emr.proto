@@ -1,8 +1,11 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
 package emr;
 
 service EmrService {
+  rpc Status (google.protobuf.Empty) returns (StatusReply) {}
   rpc GetPerson (PersonRequest) returns (PersonReply) {}
   rpc GetLastOpd (LastOpdRequest) returns (LastOpdReply) {}
   rpc GetLastIpd (LastIpdRequest) returns (LastIpdReply) {}
@@ -13,6 +16,11 @@ service EmrService {
   rpc GetOpdLab (OpdLabRequest) returns (OpdLabReply) {}
   rpc GetOpdInfo (OpdInfoRequest) returns (OpdInfoReply) {}
   rpc GetIpdInfo (IpdInfoRequest) returns (IpdInfoReply) {}
+}
+
+message StatusReply {
+  bool ok = 1;
+  string version = 2;
 }
 
 message PersonRequest {
@@ -27,12 +35,14 @@ message LastOpdRequest {
 
 message OpdInfoRequest {
   string hospcode = 1;
-  string seq = 2;
+  string hn = 2;
+  string seq = 3;
 }
 
 message IpdInfoRequest {
   string hospcode = 1;
-  string an = 2;
+  string hn = 2;
+  string an = 3;
 }
 
 message LastIpdRequest {
@@ -42,27 +52,32 @@ message LastIpdRequest {
 
 message OpdDiagRequest {
   string hospcode = 1;
-  string seq = 2;
+  string hn = 2;
+  string seq = 3;
 }
 
 message OpdLabRequest {
   string hospcode = 1;
-  string seq = 2;
+  string hn = 2;
+  string seq = 3;
 }
 
 message OpdDrugRequest {
   string hospcode = 1;
-  string seq = 2;
+  string hn = 2;
+  string seq = 3;
 }
 
 message IpdDrugRequest {
   string hospcode = 1;
-  string an = 2;
+  string hn = 2;
+  string an = 3;
 }
 
 message IpdDiagRequest {
   string hospcode = 1;
-  string an = 2;
+  string hn = 2;
+  string an = 3;
 }
 
 message PersonReply {

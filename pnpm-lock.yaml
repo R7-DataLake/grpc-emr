@@ -3,7 +3,6 @@ lockfileVersion: 5.4
 specifiers:
   '@grpc/grpc-js': ^1.8.12
   '@grpc/proto-loader': ^0.7.5
-  '@malijs/jwt': ^0.4.0
   '@types/lodash': ^4.14.191
   '@types/luxon': ^3.2.0
   '@types/node': ^18.15.3
@@ -26,7 +25,6 @@ specifiers:
 dependencies:
   '@grpc/grpc-js': 1.8.12
   '@grpc/proto-loader': 0.7.5
-  '@malijs/jwt': 0.4.0
   ajv: 8.12.0
   dotenv: 16.0.3
   fluent-json-schema: 4.1.0
@@ -74,49 +72,12 @@ packages:
       yargs: 16.2.0
     dev: false
 
-  /@malijs/bearer/0.2.0:
-    resolution: {integrity: sha512-nnF5MF4Vo99h6kq2EBv15XkFUR4iRnl9WnHhhQQN6OoJC2r4WaDdDN/U1FyhFBc+iWZq417gSH2epHsJWdATVA==}
-    dependencies:
-      '@malijs/metadata-field-auth': 0.2.1
-    transitivePeerDependencies:
-      - grpc
-    dev: false
-
   /@malijs/call-types/0.4.0:
     resolution: {integrity: sha512-zSmEgjTkkB2AOmS8qHh+4OjPNgiY6B6ij3orR340O5SjXgePxAzFVn6W9K0CPx4KVZlMq7kaEYKlMWpiVnIpfg==}
     dev: false
 
   /@malijs/compose/1.3.2:
     resolution: {integrity: sha512-yQwAWHDq14uN95QIViP5WY0kMpiGv6nj5+HpJkjz9Um84FeGQYT3VonFVFsuAnBvGrhAFl0IiKKgpFk+hP/tQw==}
-    dev: false
-
-  /@malijs/jwt/0.4.0:
-    resolution: {integrity: sha512-9K1oEPFayEmB/r4gtK2uuLMG9KU2OQeJ/QWkQ30Krwh1GsLIAkPDFxxn5711V3JwSS3CuS/kTXPIupD1h457dg==}
-    dependencies:
-      '@malijs/bearer': 0.2.0
-      jsonwebtoken: 8.5.1
-      lodash.get: 4.4.2
-      lodash.set: 4.3.2
-      pify: 4.0.1
-    transitivePeerDependencies:
-      - grpc
-    dev: false
-
-  /@malijs/metadata-auth/0.2.0:
-    resolution: {integrity: sha512-CGDgLC143IAbRKKCvqjjblztSTJ/YNr9dZLQlL2v9LQvOeMQWCwJ8Fp8twtQyRy0c8hoggM6eE55OiDfQWQRfw==}
-    dependencies:
-      grpc-create-error: 1.2.1
-    transitivePeerDependencies:
-      - grpc
-    dev: false
-
-  /@malijs/metadata-field-auth/0.2.1:
-    resolution: {integrity: sha512-L7Q3B2jTEuguLrGeeBmhbtHiIlgDDG18pI1+UYz8O5pvaf89x3VTVpbtM42J9qiene+Ycb+kyZy8GfEmDJZGnA==}
-    dependencies:
-      '@malijs/metadata-auth': 0.2.0
-      grpc-create-error: 1.2.1
-    transitivePeerDependencies:
-      - grpc
     dev: false
 
   /@protobufjs/aspromise/1.1.2:
@@ -1191,23 +1152,6 @@ packages:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
     dev: true
 
-  /grpc-create-error/1.2.1:
-    resolution: {integrity: sha512-UT9+BdncguGYo/qt+NnzKHEeX3DHDwfoUsoqQCvr8GjjNm/hO3dYoNs9FGqGIOJW18TGFBksXu9Az5+3GdC2gg==}
-    engines: {node: '>=8.0.0'}
-    dependencies:
-      grpc-create-metadata: 3.0.0
-    transitivePeerDependencies:
-      - grpc
-    dev: false
-
-  /grpc-create-metadata/3.0.0:
-    resolution: {integrity: sha512-Gr+wYv4NdlG1fKbk7W60xI+6tgWaereF/8ga1NTo9W7IhCAH+mqMt6NDXYBwa9v4KFLWKWngNhDSdGU+HLVdIw==}
-    peerDependencies:
-      grpc: ^1.0.0
-    dependencies:
-      lodash.forown: 4.4.0
-    dev: false
-
   /gulp-cli/2.3.0:
     resolution: {integrity: sha512-zzGBl5fHo0EKSXsHzjspp3y5CONegCm8ErO5Qh0UzFzk2y4tMvzLWhoDokADbarfZRL2pGpRp7yt6gfJX4ph7A==}
     engines: {node: '>= 0.10'}
@@ -1604,22 +1548,6 @@ packages:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: true
 
-  /jsonwebtoken/8.5.1:
-    resolution: {integrity: sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==}
-    engines: {node: '>=4', npm: '>=1.4.28'}
-    dependencies:
-      jws: 3.2.2
-      lodash.includes: 4.3.0
-      lodash.isboolean: 3.0.3
-      lodash.isinteger: 4.0.4
-      lodash.isnumber: 3.0.3
-      lodash.isplainobject: 4.0.6
-      lodash.isstring: 4.0.1
-      lodash.once: 4.1.1
-      ms: 2.1.3
-      semver: 5.7.1
-    dev: false
-
   /jsonwebtoken/9.0.0:
     resolution: {integrity: sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw==}
     engines: {node: '>=12', npm: '>=6'}
@@ -1780,48 +1708,8 @@ packages:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
     dev: false
 
-  /lodash.forown/4.4.0:
-    resolution: {integrity: sha512-xcpca6BCshoe5SFSrQOoV8FBEbNzcBa6QQYmtv48eEFNzdwQLkHkcWSaBlecHhyHb1BUk1xqFdXoiSLJkt/w5w==}
-    dev: false
-
-  /lodash.get/4.4.2:
-    resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
-    dev: false
-
-  /lodash.includes/4.3.0:
-    resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
-    dev: false
-
-  /lodash.isboolean/3.0.3:
-    resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
-    dev: false
-
-  /lodash.isinteger/4.0.4:
-    resolution: {integrity: sha512-DBwtEWN2caHQ9/imiNeEA5ys1JoRtRfY3d7V9wkqtbycnAmTvRRmbHKDV4a0EYc678/dia0jrte4tjYwVBaZUA==}
-    dev: false
-
-  /lodash.isnumber/3.0.3:
-    resolution: {integrity: sha512-QYqzpfwO3/CWf3XP+Z+tkQsfaLL/EnUlXWVkIk5FUPc4sBdTehEqZONuyRt2P67PXAk+NXmTBcc97zw9t1FQrw==}
-    dev: false
-
-  /lodash.isplainobject/4.0.6:
-    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
-    dev: false
-
-  /lodash.isstring/4.0.1:
-    resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
-    dev: false
-
-  /lodash.once/4.1.1:
-    resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
-    dev: false
-
   /lodash.pull/4.1.0:
     resolution: {integrity: sha512-EM7CVTzXfkTyusQdN7mgGPh2ZfkKfQ5lA9U+X7NNDeEgKEaO65dB5Kh8+Ppap0X1wQOndPjKP/VVTis7hFvkzg==}
-    dev: false
-
-  /lodash.set/4.3.2:
-    resolution: {integrity: sha512-4hNPN5jlm/N/HLMCO43v8BXKq9Z7QdAGc/VGrRD61w8gN9g/6jF9A4L1pbUgBLCffi0w9VsXfTOij5x8iTyFvg==}
     dev: false
 
   /lodash/4.17.21:
@@ -2268,11 +2156,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /pify/4.0.1:
-    resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
-    engines: {node: '>=6'}
-    dev: false
-
   /pinkie-promise/2.0.1:
     resolution: {integrity: sha512-0Gni6D4UcLTbv9c57DfxDGdr41XfgUjqWZu492f0cIGr16zDU06BWP/RAEvOuo7CQ0CNjHaLlM59YJJFm3NWlw==}
     engines: {node: '>=0.10.0'}
@@ -2571,6 +2454,7 @@ packages:
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
     hasBin: true
+    dev: true
 
   /semver/7.0.0:
     resolution: {integrity: sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==}
